@@ -1,2 +1,3 @@
-# zotmarket
-UCI marketplace for students
+#ZotMarket
+
+Marketplace for UCI Students
