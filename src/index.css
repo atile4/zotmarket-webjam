@@ -27,3 +27,17 @@ body {
   text-decoration: none;
   color: inherit;
 }
+
+.auth-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.auth-link {
+  font-size: 18px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 400;
+  cursor: pointer;
+}
