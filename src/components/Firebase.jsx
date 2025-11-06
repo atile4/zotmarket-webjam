@@ -1,19 +1,24 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAltYHpciB4QULfyROFt52AI1D7kzMmYlw",
-  authDomain: "webjam-zotmarket.firebaseapp.com",
-  projectId: "webjam-zotmarket",
-  storageBucket: "webjam-zotmarket.firebasestorage.app",
-  messagingSenderId: "916224197139",
-  appId: "1:916224197139:web:6d4f288b9b80a239f335e6",
-  measurementId: "G-Q57VYL0S15"
+  apiKey: "AIzaSyBVEm25iPBkBoq1JxkkPfzWmYLfhe3K0s0",
+  authDomain: "zotmarket-3e777.firebaseapp.com",
+  projectId: "zotmarket-3e777",
+  storageBucket: "zotmarket-3e777.appspot.com",
+  messagingSenderId: "445300335827",
+  appId: "1:445300335827:web:780cfc83959955c7622026",
+  measurementId: "G-6H0NRZD95K"
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
+const analytics = getAnalytics(app);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
