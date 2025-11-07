@@ -63,7 +63,7 @@ function Header() {
 			<div className="auth-links">
 				{user ? (
 					<>
-						<span className="welcome-text">What's up!</span>
+						<span className="welcome-text">What's up! {user.email}</span>
 						<button onClick={handleSignOut} className="auth-link">
 							Sign Out
 						</button>

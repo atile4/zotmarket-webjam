@@ -39,6 +39,7 @@ export default function CreatePost() {
         email: auth.currentUser.email,
         text,
         imageUrl,
+        interestedUsers: [],
         createdAt: serverTimestamp(),
       });
 
@@ -47,7 +48,7 @@ export default function CreatePost() {
       alert("Post created!");
     } catch (error) {
       console.error("Error posting:", error);
-      alert("Failed to create post: Please Login");
+      alert("Failed to create post: Please");
     } finally {
       setLoading(false);
     }

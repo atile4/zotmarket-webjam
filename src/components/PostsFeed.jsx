@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 import {
   collection,
   query,
   orderBy,
   onSnapshot,
+  updateDoc,
+  arrayUnion,
+  doc,
 } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
+  const [userEmail, setUserEmail] = useState(null);  // track logged-in user email
 
   useEffect(() => {
-    const q = query(
-      collection(db, "posts"),
-      orderBy("createdAt", "desc")
-    );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    // Listen for auth state changes
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      setUserEmail(user ? user.email : null);
+    });
+
+    // Load posts
+    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+    const unsubscribePosts = onSnapshot(q, (querySnapshot) => {
       const postsArr = [];
       querySnapshot.forEach((doc) => {
         postsArr.push({ id: doc.id, ...doc.data() });
@@ -23,38 +31,80 @@ export default function PostsFeed() {
       setPosts(postsArr);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+      unsubscribePosts();
+    };
   }, []);
+
+  const handleInterestedClick = async (postId) => {
+    if (!auth.currentUser) {
+      alert("Please log in to express interest.");
+      return;
+    }
+
+    const postRef = doc(db, "posts", postId);
+
+    try {
+      await updateDoc(postRef, {
+        interestedUsers: arrayUnion(auth.currentUser.email),
+      });
+      alert("You have expressed interest in this post!");
+    } catch (error) {
+      console.error("Error updating interested users:", error);
+      alert("Failed to express interest. Please try again.");
+    }
+  };
 
   return (
     <div>
       {posts.length === 0 && <p>No posts yet.</p>}
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          style={{
-            border: "1px solid #ccc",
-            padding: 10,
-            marginBottom: 10,
-            borderRadius: 5,
-          }}
-        >
-          <p>
-            <strong>{post.email}</strong> says:
-          </p>
-          <p>{post.text}</p>
-          {post.imageUrl && (
-            <img
-              src={post.imageUrl}
-              alt="Post image"
-              style={{ maxWidth: "300px", maxHeight: "300px" }}
-            />
-          )}
-          <p style={{ fontSize: "0.8em", color: "#666" }}>
-            {post.createdAt?.toDate().toLocaleString()}
-          </p>
-        </div>
-      ))}
+      {posts.map((post) => {
+        const isOwner = userEmail === post.email;  // use userEmail from state
+        const interestedUsers = post.interestedUsers || [];
+
+        return (
+          <div
+            key={post.id}
+            style={{
+              border: "1px solid #ccc",
+              padding: 10,
+              marginBottom: 10,
+              borderRadius: 5,
+            }}
+          >
+            <p>
+              <strong>{post.email}</strong> says:
+            </p>
+            <p>{post.text}</p>
+            {post.imageUrl && (
+              <img
+                src={post.imageUrl}
+                alt="Post image"
+                style={{ maxWidth: "300px", maxHeight: "300px" }}
+              />
+            )}
+            <p style={{ fontSize: "0.8em", color: "#666" }}>
+              {post.createdAt?.toDate().toLocaleString()}
+            </p>
+            <button onClick={() => handleInterestedClick(post.id)}>
+              Interested
+            </button>
+
+            {/* Show interested users ONLY to the post owner */}
+            {isOwner && interestedUsers.length > 0 && (
+              <div style={{ marginTop: 10, fontSize: "0.9em", color: "#007bff" }}>
+                Interested Users:
+                <ul>
+                  {interestedUsers.map((email, index) => (
+                    <li key={index}>{email}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
