@@ -10,6 +10,11 @@ import {
   doc,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import bike from "../assets/bike.jpg";
+import table from "../assets/table.jpg";
+import box from "../assets/box.jpg";
+import cup from "../assets/cup.jpg";
+import tablet from "../assets/tablet.jpg";
 
 export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
@@ -36,6 +41,23 @@ export default function PostsFeed() {
       unsubscribePosts();
     };
   }, []);
+
+  const getImage = (text) => {
+    switch (text) {
+      case "Looking to sell a bike.":
+        return bike;
+      case "Selling a table.":
+        return table;
+      case "Looking to sell a box.":
+        return box;
+      case "Selling cup.":
+        return cup;
+      case "Looking to sell a tablet":
+        return tablet;
+      default:
+        return null;
+    }
+  }
 
   const handleInterestedClick = async (postId) => {
     if (!auth.currentUser) {
@@ -79,13 +101,13 @@ export default function PostsFeed() {
               <strong>{post.email}</strong> says:
             </p>
             <p>{post.text}</p>
-            {post.imageUrl && (
+            {
               <img
-                src={post.imageUrl}
+                src={getImage(post.text)}
                 alt="Post image"
-                style={{ maxWidth: "300px", maxHeight: "300px" }}
+                style={{ maxWidth: "100px", maxHeight: "100px" }}
               />
-            )}
+            }
             <p style={{ fontSize: "0.8em", color: "#666" }}>
               {post.createdAt?.toDate().toLocaleString()}
             </p>
