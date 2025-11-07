@@ -2,25 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {
-	getAuth,
-	onAuthStateChanged,
-	signOut,
-	signInWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBVEm25iPBkBoq1JxkkPfzWmYLfhe3K0s0",
-  authDomain: "zotmarket-3e777.firebaseapp.com",
-  projectId: "zotmarket-3e777",
-  storageBucket: "zotmarket-3e777.firebasestorage.app",
-  messagingSenderId: "445300335827",
-  appId: "1:445300335827:web:780cfc83959955c7622026",
-  measurementId: "G-6H0NRZD95K"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { firebaseConfig, auth, app } from "./firebase";
 
 function Header() {
 	const [user, setUser] = useState(null);
