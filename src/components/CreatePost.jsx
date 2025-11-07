@@ -56,71 +56,56 @@ export default function CreatePost() {
 
   return (
     <form onSubmit={handleSubmit} style={{
-      marginBottom: 20,
-      maxWidth: 500,
+      marginBottom: 30,
       marginLeft: "auto",
       marginRight: "auto",
+      maxWidth: "500px",
+      padding: "20px",
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      backgroundColor: "white",
       display: "flex",
       flexDirection: "column",
-    }}
-    
-    >
+    }}>
+      <h2 style={{ margin: "0 0 15px 0", fontSize: "18px" }}>Create a New Post</h2>
       <textarea
-        placeholder="Write your post here..."
+        placeholder="What are you selling or looking for?"
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={4}
         style={{
-        width: "100%",
-        resize: "vertical",
-        padding: "12px 14px",
-        fontSize: 16,
-        borderRadius: 8,
-        border: "1.5px solid #ccc",
-        outline: "none",
-        transition: "border-color 0.3s ease",
-        fontFamily: 'inherit',
-      }}
+          width: "100%",
+          padding: "10px",
+          fontSize: 14,
+          borderRadius: "4px",
+          border: "1px solid #ccc",
+          fontFamily: 'inherit',
+          boxSizing: "border-box"
+        }}
       />
       <input
         type="file"
         accept="image/*"
         onChange={(e) => setImageFile(e.target.files[0])}
         style={{
-        marginTop: 12,
-        fontSize: 16,
-        cursor: "pointer",
-        color: "blue",
-      }}
+          marginTop: 10,
+          fontSize: 14,
+        }}
       />
-      <button type="submit" disabled={loading} style={{
-        marginTop: 14,
-        backgroundColor: loading ? "#a5b4fc" : "#4f46e5",
-        color: "#d1d5db",
-        border: "none",
-        padding: "12px 0",
-        fontSize: 18,
-        borderRadius: 8,
-        cursor: loading ? "not-allowed" : "pointer",
-        boxShadow: loading
-          ? "none"
-          : "0 2px 8px rgba(79, 70, 229, 0.6)",
-        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
-        fontWeight: "600",
-        userSelect: "none",
-      }}
-      onMouseEnter={(e) => {
-        if (!loading) e.currentTarget.style.backgroundColor = "#4338ca";
-      }}
-      onMouseLeave={(e) => {
-        if (!loading) e.currentTarget.style.backgroundColor = "#4f46e5";
-      }}
-      onMouseDown={(e) => {
-        if (!loading) e.currentTarget.style.backgroundColor = "#3730a3";
-      }}
-      onMouseUp={(e) => {
-        if (!loading) e.currentTarget.style.backgroundColor = "#4f46e5";
-      }}>
+      <button 
+        type="submit" 
+        disabled={loading} 
+        style={{
+          marginTop: 10,
+          backgroundColor: loading ? "#ccc" : "#4f46e5",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          fontSize: 16,
+          borderRadius: "4px",
+          cursor: loading ? "not-allowed" : "pointer",
+        }}
+      >
         {loading ? "Posting..." : "Post"}
       </button>
     </form>
