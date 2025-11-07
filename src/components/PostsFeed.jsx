@@ -57,7 +57,7 @@ export default function PostsFeed() {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
       {posts.length === 0 && <p>No posts yet.</p>}
       {posts.map((post) => {
         const isOwner = userEmail === post.email;  // use userEmail from state
@@ -69,8 +69,10 @@ export default function PostsFeed() {
             style={{
               border: "1px solid #ccc",
               padding: 10,
-              marginBottom: 10,
               borderRadius: 5,
+              flex: "1 1 300px",
+              minWidth: "300px",
+              maxWidth: "400px",
             }}
           >
             <p>

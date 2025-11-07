@@ -67,7 +67,7 @@ export default function CreatePost() {
       display: "flex",
       flexDirection: "column",
     }}>
-      <h2 style={{ margin: "0 0 15px 0", fontSize: "18px" }}>Create a New Post</h2>
+      <h2 style={{ margin: "0 0 15px 0", fontSize: "18px" }}>Zot Market Posts</h2>
       <textarea
         placeholder="What are you selling or looking for?"
         value={text}
