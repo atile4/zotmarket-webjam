@@ -6,8 +6,8 @@ function Home() {
     
     <>
     <Header />
-     <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
-      <h1>Zot Market Posts</h1>
+     <div style={{ maxWidth: 1200, margin: "auto", padding: 20 }}>
+
       <CreatePost />
       <PostsFeed />
     </div>
