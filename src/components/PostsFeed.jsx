@@ -87,7 +87,23 @@ export default function PostsFeed() {
             <p style={{ fontSize: "0.8em", color: "#666" }}>
               {post.createdAt?.toDate().toLocaleString()}
             </p>
-            <button onClick={() => handleInterestedClick(post.id)}>
+            <button onClick={() => handleInterestedClick(post.id)}
+              style={{
+    backgroundColor: '#4f46e5',
+    color: '#d1d5db',  // Tailwind’s gray-300
+    border: 'none',
+    padding: '8px 8px',
+    fontSize: '15px',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease, boxShadow 0.2s ease',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+  onMouseDown={e => (e.currentTarget.style.backgroundColor = '#3730a3')}
+  onMouseUp={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+              
+              >
               Interested
             </button>
 

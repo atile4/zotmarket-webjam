@@ -64,7 +64,23 @@ function Header() {
 				{user ? (
 					<>
 						<span className="welcome-text">What's up! {user.email}</span>
-						<button onClick={handleSignOut} className="auth-link">
+						<button onClick={handleSignOut} className="auth-link"
+            style={{
+    backgroundColor: '#4f46e5',
+    color: '#d1d5db',  // Tailwind’s gray-300
+    border: 'none',
+    padding: '10px 10px',
+    fontSize: '16px',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: '0 2px 6px rgba(79, 70, 229, 0.4)',
+    transition: 'background-color 0.3s ease, boxShadow 0.2s ease',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+  onMouseDown={e => (e.currentTarget.style.backgroundColor = '#3730a3')}
+  onMouseUp={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+            >
 							Sign Out
 						</button>
 					</>
@@ -77,18 +93,80 @@ function Header() {
 									placeholder="Email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
+                  style={{
+        width: '100%',
+        padding: '10px 12px',
+        marginBottom: '12px',
+        fontSize: '16px',
+        borderRadius: '6px',
+        border: '1.5px solid #ccc',
+        outline: 'none',
+        boxSizing: 'border-box',
+        transition: 'border-color 0.3s ease',
+      }}
+      onFocus={e => (e.currentTarget.style.borderColor = '#4f46e5')}  // Indigo focus
+      onBlur={e => (e.currentTarget.style.borderColor = '#ccc')}
 								/>
 								<input
 									type="password"
 									placeholder="Password"
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
+
+                  style={{
+        width: '100%',
+        padding: '10px 12px',
+        marginBottom: '12px',
+        fontSize: '16px',
+        borderRadius: '6px',
+        border: '1.5px solid #ccc',
+        outline: 'none',
+        boxSizing: 'border-box',
+        transition: 'border-color 0.3s ease',
+      }}
+      onFocus={e => (e.currentTarget.style.borderColor = '#4f46e5')}  // Indigo focus
+      onBlur={e => (e.currentTarget.style.borderColor = '#ccc')}
 								/>
 								{error && <p className="error">{error}</p>}
-								<button type="submit">Sign In</button>
+								<button type="submit"
+                
+                style={{
+    backgroundColor: '#4f46e5',
+    color: '#d1d5db',  // Tailwind’s gray-300
+    border: 'none',
+    padding: '10px 10px',
+    fontSize: '16px',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: '0 2px 6px rgba(79, 70, 229, 0.4)',
+    transition: 'background-color 0.3s ease, boxShadow 0.2s ease',
+    marginRight: '10px', 
+    marginLeft: '10px',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+  onMouseDown={e => (e.currentTarget.style.backgroundColor = '#3730a3')}
+  onMouseUp={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+                >Sign In</button>
 								<button
 									type="button"
 									onClick={() => setShowLogin(false)}
+
+                  style={{
+    backgroundColor: '#4f46e5',
+    color: '#d1d5db',  // Tailwind’s gray-300
+    border: 'none',
+    padding: '10px 10px',
+    fontSize: '16px',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: '0 2px 6px rgba(79, 70, 229, 0.4)',
+    transition: 'background-color 0.3s ease, boxShadow 0.2s ease',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+  onMouseDown={e => (e.currentTarget.style.backgroundColor = '#3730a3')}
+  onMouseUp={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
 								>
 									Cancel
 								</button>
@@ -98,6 +176,23 @@ function Header() {
 								<button
 									onClick={() => setShowLogin(true)}
 									className="auth-link"
+
+
+                  style={{
+    backgroundColor: '#4f46e5',
+    color: '#d1d5db',  // Tailwind’s gray-300
+    border: 'none',
+    padding: '10px 10px',
+    fontSize: '16px',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: '0 2px 6px rgba(79, 70, 229, 0.4)',
+    transition: 'background-color 0.3s ease, boxShadow 0.2s ease',
+  }}
+  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+  onMouseDown={e => (e.currentTarget.style.backgroundColor = '#3730a3')}
+  onMouseUp={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
 								>
 									Sign In
 								</button>

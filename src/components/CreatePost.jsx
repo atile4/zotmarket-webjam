@@ -55,21 +55,72 @@ export default function CreatePost() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
+    <form onSubmit={handleSubmit} style={{
+      marginBottom: 20,
+      maxWidth: 500,
+      marginLeft: "auto",
+      marginRight: "auto",
+      display: "flex",
+      flexDirection: "column",
+    }}
+    
+    >
       <textarea
         placeholder="Write your post here..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={4}
-        style={{ width: "100%", resize: "vertical" }}
+        style={{
+        width: "100%",
+        resize: "vertical",
+        padding: "12px 14px",
+        fontSize: 16,
+        borderRadius: 8,
+        border: "1.5px solid #ccc",
+        outline: "none",
+        transition: "border-color 0.3s ease",
+        fontFamily: 'inherit',
+      }}
       />
       <input
         type="file"
         accept="image/*"
         onChange={(e) => setImageFile(e.target.files[0])}
-        style={{ marginTop: 10 }}
+        style={{
+        marginTop: 12,
+        fontSize: 16,
+        cursor: "pointer",
+        color: "blue",
+      }}
       />
-      <button type="submit" disabled={loading} style={{ marginTop: 10 }}>
+      <button type="submit" disabled={loading} style={{
+        marginTop: 14,
+        backgroundColor: loading ? "#a5b4fc" : "#4f46e5",
+        color: "#d1d5db",
+        border: "none",
+        padding: "12px 0",
+        fontSize: 18,
+        borderRadius: 8,
+        cursor: loading ? "not-allowed" : "pointer",
+        boxShadow: loading
+          ? "none"
+          : "0 2px 8px rgba(79, 70, 229, 0.6)",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+        fontWeight: "600",
+        userSelect: "none",
+      }}
+      onMouseEnter={(e) => {
+        if (!loading) e.currentTarget.style.backgroundColor = "#4338ca";
+      }}
+      onMouseLeave={(e) => {
+        if (!loading) e.currentTarget.style.backgroundColor = "#4f46e5";
+      }}
+      onMouseDown={(e) => {
+        if (!loading) e.currentTarget.style.backgroundColor = "#3730a3";
+      }}
+      onMouseUp={(e) => {
+        if (!loading) e.currentTarget.style.backgroundColor = "#4f46e5";
+      }}>
         {loading ? "Posting..." : "Post"}
       </button>
     </form>
